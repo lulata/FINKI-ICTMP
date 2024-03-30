@@ -1,0 +1,44 @@
+@import '../abstracts/mixins';
+@import '../abstracts/variables';
+
+#app {
+  @include respond(laptop) {
+  }
+
+  @include respond(tablet) {
+  }
+
+  @include respond(phone) {
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 10px;
+  letter-spacing: 0.03em;
+  font-family: 'Inter';
+  text-decoration: none;
+}
+html {
+  width: 100%;
+  height: 100%;
+}
+html,
+body {
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+#app {
+  display: flex;
+  flex-grow: 1;
+}
