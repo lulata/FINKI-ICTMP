@@ -1,0 +1,29 @@
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  padding: 0 24px;
+  background: hsla(0, 0%, 12%, 1);
+  .navigation-section {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    .logo {
+      height: 55px;
+      object-fit: contain;
+    }
+
+    a {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 33px;
+      color: $whiteColor;
+    }
+
+    .input-component {
+      min-width: 300px;
+    }
+  }
+}
