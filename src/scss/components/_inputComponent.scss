@@ -29,5 +29,10 @@
     &:focus {
       border-color: hsla(0, 0%, 50%, 1);
     }
+
+    &::placeholder {
+      color: hsla(0, 0%, 74%, 1);
+      font-weight: 700;
+    }
   }
 }

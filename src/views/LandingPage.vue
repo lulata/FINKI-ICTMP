@@ -7,7 +7,7 @@
         <p class="title-text">Welcome to Store 26!</p>
         <router-link
           :to="{
-            name: 'LandingPage',
+            name: 'ShopPage',
           }">
           SHOP NOW
         </router-link>

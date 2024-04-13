@@ -29,9 +29,9 @@
           >
           <router-link
             :to="{
-              name: 'LandingPage',
+              name: 'ShopPage',
             }"
-            >Option 2</router-link
+            >Shop</router-link
           ><router-link
             :to="{
               name: 'LandingPage',

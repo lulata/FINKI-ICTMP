@@ -1,7 +1,13 @@
 <template>
   <nav>
     <div class="navigation-section">
-      <img src="@/assets/logo.svg" class="logo" />
+      <router-link
+        :to="{
+          name: 'LandingPage',
+        }"
+        ><img src="@/assets/logo.svg" class="logo"
+      /></router-link>
+
       <router-link
         :to="{
           name: 'LandingPage',
@@ -10,7 +16,7 @@
       >
       <router-link
         :to="{
-          name: 'LandingPage',
+          name: 'ShopPage',
         }"
         >Shop
       </router-link>
@@ -37,11 +43,16 @@
       <InputComponent :image="'/icons/searchIcon.svg'" />
       <img src="@/assets/heartIcon.svg" alt="" />
       <img src="@/assets/cartIcon.svg" alt="" />
-      <img src="@/assets/accountIcon.svg" alt="" />
+      <img src="@/assets/accountIcon.svg" alt="" @click="authComponentOpened = true" />
     </div>
   </nav>
+  <AuthComponent v-if="authComponentOpened" @close="authComponentOpened = false" />
 </template>
 
 <script lang="ts" setup>
 import InputComponent from '@/components/InputComponent.vue';
+import AuthComponent from '@/components/AuthComponent.vue';
+import { ref } from 'vue';
+
+const authComponentOpened = ref(false);
 </script>
