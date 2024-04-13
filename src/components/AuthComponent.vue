@@ -92,6 +92,12 @@ const validation = useVuelidate(validationRules, userInfo);
 
 function close() {
   emit('close');
+  userInfo.value = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+  };
 }
 
 function auth() {
@@ -107,8 +113,9 @@ function auth() {
         password: userInfo.value.password,
       })
       .then((response) => {
-        window.refreshToken = response.data.refreshToken;
-        document.cookie = `store26RefreshToken=${window.refreshToken}`;
+        window.token = response.data.token;
+        window.isAuthenticated = true;
+        document.cookie = `store26Token=${window.token}`;
         close();
       })
       .catch(() => {
@@ -122,9 +129,8 @@ function auth() {
         email: userInfo.value.email,
         password: userInfo.value.password,
       })
-      .then((response) => {
-        window.refreshToken = response.data.refreshToken;
-        close();
+      .then(() => {
+        isSignIn.value = true;
       })
       .catch(() => {
         console.log('Sign Up failed');

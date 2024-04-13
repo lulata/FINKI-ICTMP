@@ -8,29 +8,26 @@ const app = createApp(App);
 declare global {
   interface Window {
     isAuthenticated: boolean;
-    refreshToken: string;
+    token: string;
   }
 }
 
 app.use(router);
 
 window.isAuthenticated = false;
-window.refreshToken = '';
+window.token = '';
 
-const store26RefreshToken = document.cookie
-  .split(';')
-  .find((cookie) => cookie.trim().startsWith('store26RefreshToken='));
-console.log(store26RefreshToken);
+const store26Token = document.cookie.split(';').find((cookie) => cookie.trim().startsWith('store26Token='));
+console.log(store26Token);
 
-if (store26RefreshToken) {
-  const refreshToken = store26RefreshToken.split('=')[1];
-  window.refreshToken = refreshToken;
+if (store26Token) {
+  window.token = store26Token.split('=')[1];
 }
 
 axios.interceptors.request.use(
   (config) => {
-    if (window.refreshToken) {
-      config.headers.Authorization = `Bearer ${window.refreshToken}`;
+    if (window.token) {
+      config.headers.Authorization = `Bearer ${window.token}`;
     }
     return config;
   },
@@ -40,15 +37,15 @@ axios.interceptors.request.use(
 );
 
 axios
-  .post('/api/auth/refresh')
+  .get('/api/auth/user-info')
   .then((response) => {
     window.isAuthenticated = true;
-    window.refreshToken = response.data.refreshToken;
-    document.cookie = `store26RefreshToken=${response.data.refreshToken}`;
+    window.token = response.data.token;
+    document.cookie = `store26Token=${response.data.token}`;
   })
   .catch(() => {
     window.isAuthenticated = false;
-    window.refreshToken = '';
+    window.token = '';
   })
   .finally(() => {
     app.mount('#app');
