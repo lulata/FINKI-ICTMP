@@ -35,4 +35,13 @@
       font-weight: 700;
     }
   }
+  &.is-invalid {
+    input {
+      border-color: red;
+
+      &::placeholder {
+        color: red;
+      }
+    }
+  }
 }

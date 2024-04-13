@@ -1,7 +1,11 @@
 <template>
   <div class="input-component">
     <img :src="image" />
-    <input :id="id" v-model="value" :type="inputType" :placeholder="placeHolder" />
+    <input
+      :id="id"
+      v-model="value"
+      :type="inputType"
+      :placeholder="placeHolder + (errorMessage ? ' - ' + errorMessage : '')" />
     <label :for="id"></label>
   </div>
 </template>
