@@ -11,6 +11,16 @@ const routes: Array<RouteRecordRaw> = [
     name: 'ShopPage',
     component: () => import(/* webpackChunkName: "user" */ '@/views/ShopPage.vue'),
   },
+  {
+    path: '/CategoryPage',
+    name: 'CategoryPage',
+    component: () => import(/* webpackChunkName: "user" */ '@/views/CategoryPage.vue'),
+  },
+  {
+    path: '/ProductPage',
+    name: 'ProductPage',
+    component: () => import(/* webpackChunkName: "user" */ '@/views/ProductPage.vue'),
+  },
 ];
 
 const router = createRouter({
