@@ -116,6 +116,9 @@ function auth() {
         window.token = response.data.token;
         window.isAuthenticated = true;
         document.cookie = `store26Token=${window.token}`;
+        axios.get('/api/auth/user-info').then((response) => {
+          window.userInfo = response.data;
+        });
         close();
       })
       .catch(() => {

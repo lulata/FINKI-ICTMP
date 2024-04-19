@@ -1,11 +1,11 @@
 <template>
   <div class="input-component">
-    <img :src="image" />
+    <img :src="image" v-if="image" />
     <input
       :id="id"
       v-model="value"
       :type="inputType"
-      :placeholder="placeHolder + (errorMessage ? ' - ' + errorMessage : '')" />
+      :placeholder="placeHolder ? placeHolder : '' + (errorMessage ? ' - ' + errorMessage : '')" />
     <label :for="id"></label>
   </div>
 </template>
@@ -17,7 +17,7 @@ withDefaults(
   defineProps<{
     inputType?: string;
     errorMessage?: string;
-    image: string;
+    image?: string;
     placeHolder?: string;
   }>(),
   {

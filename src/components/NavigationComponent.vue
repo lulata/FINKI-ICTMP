@@ -43,7 +43,14 @@
       <InputComponent :image="'/icons/searchIcon.svg'" />
       <img src="@/assets/heartIcon.svg" alt="" />
       <img src="@/assets/cartIcon.svg" alt="" />
-      <img src="@/assets/accountIcon.svg" alt="" @click="authComponentOpened = true" />
+      <img src="@/assets/accountIcon.svg" @click="authComponentOpened = true" v-if="!isAuthenticated" />
+      <router-link
+        v-else
+        :to="{
+          name: 'LandingPage',
+        }">
+        <img src="@/assets/accountIcon.svg" />
+      </router-link>
     </div>
   </nav>
   <AuthComponent v-if="authComponentOpened" @close="authComponentOpened = false" />
@@ -52,7 +59,11 @@
 <script lang="ts" setup>
 import InputComponent from '@/components/InputComponent.vue';
 import AuthComponent from '@/components/AuthComponent.vue';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 const authComponentOpened = ref(false);
+
+const isAuthenticated = computed(() => {
+  return window.isAuthenticated;
+});
 </script>

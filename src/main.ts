@@ -2,8 +2,10 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 import axios from 'axios';
-import "bootstrap/dist/css/bootstrap.min.css"
-import "bootstrap"
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap';
+
+import { UserInfo } from '@/types';
 
 const app = createApp(App);
 
@@ -11,16 +13,15 @@ declare global {
   interface Window {
     isAuthenticated: boolean;
     token: string;
+    userInfo: UserInfo | null;
   }
 }
 
-app.use(router);
-
 window.isAuthenticated = false;
 window.token = '';
+window.userInfo = null;
 
 const store26Token = document.cookie.split(';').find((cookie) => cookie.trim().startsWith('store26Token='));
-console.log(store26Token);
 
 if (store26Token) {
   window.token = store26Token.split('=')[1];
@@ -38,17 +39,32 @@ axios.interceptors.request.use(
   }
 );
 
+router.beforeEach(function (to, from, next) {
+  console.log(to, window.isAuthenticated, window.userInfo?.role);
+  if (to.meta.requiresAuth && !window.isAuthenticated) {
+    next({ name: 'LandingPage' });
+  } else if (
+    to.meta.requiresAdmin &&
+    window.isAuthenticated &&
+    (window.userInfo?.role !== 'ADMIN' || !window.isAuthenticated)
+  ) {
+    next({ name: 'LandingPage' });
+  }
+  next();
+});
+
 axios
   .get('/api/auth/user-info')
   .then((response) => {
     window.isAuthenticated = true;
-    window.token = response.data.token;
-    document.cookie = `store26Token=${response.data.token}`;
+    window.userInfo = response.data;
   })
   .catch(() => {
     window.isAuthenticated = false;
     window.token = '';
+    window.userInfo = null;
   })
   .finally(() => {
+    app.use(router);
     app.mount('#app');
   });
