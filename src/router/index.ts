@@ -64,6 +64,15 @@ const routes: Array<RouteRecordRaw> = [
       requiresAdmin: true,
     },
   },
+  {
+    path: '/admin/products/:id/sizes',
+    name: 'AdminPageProductSizes',
+    component: () => import(/* webpackChunkName: "user" */ '@/views/admin/AdminPageProductSizes.vue'),
+    meta: {
+      requiresAuth: true,
+      requiresAdmin: true,
+    },
+  },
 ];
 
 const router = createRouter({

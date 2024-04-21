@@ -6,7 +6,6 @@
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">#</th>
           <th scope="col"></th>
           <th scope="col">Name</th>
           <th scope="col">Price</th>
@@ -14,6 +13,7 @@
           <th scope="col">Color</th>
           <th scope="col">Gender</th>
           <th scope="col">Description</th>
+          <th scope="col">Sizes</th>
           <th scope="col">
             <div class="table-buttons">
               <button type="button" class="btn btn-outline-dark ml-auto" @click="modalOpen()">Add</button>
@@ -23,9 +23,13 @@
       </thead>
       <tbody>
         <tr v-for="product in products" :key="product.id">
-          <th scope="row">{{ product.id }}</th>
           <td>
-            <img :src="convertByteToImage(product.byteImage ?? '')" alt="" />
+            <img
+              :src="convertByteToImage(product.byteImage ?? '')"
+              alt=""
+              width="100px"
+              height="100px"
+              style="object-fit: contain" />
           </td>
           <td>
             {{ product.name }}
@@ -45,8 +49,14 @@
           <td>
             {{ product.description }}
           </td>
+          <td v-html="product.sizes.map((size) => size.name + ' - ' + size.quantity).join('</br>')"></td>
           <td>
             <div class="table-buttons">
+              <router-link
+                :to="{ name: 'AdminPageProductSizes', params: { id: product.id } }"
+                class="btn btn-outline-dark">
+                Sizes
+              </router-link>
               <button type="button" class="btn btn-outline-dark" @click="modalOpen(product)">Edit</button>
               <button type="button" class="btn btn-outline-danger" @click="deleteCategory(product)">Delete</button>
             </div>
@@ -100,7 +110,7 @@
             <textarea class="form-control" id="description" v-model="newProduct.description"></textarea>
           </div>
 
-          <div class="mb-3">
+          <div class="mb-3" v-if="!newProduct.byteImage">
             <label for="formFile" class="form-label"> Image </label>
             <input
               class="form-control"
@@ -112,6 +122,19 @@
                   newProduct.image = $event.target.files[0] ;
                 }
               " />
+          </div>
+          <div class="mb-3" v-else-if="newProduct.byteImage">
+            <img
+              :src="convertByteToImage(newProduct.byteImage)"
+              alt=""
+              width="100%"
+              height="200px"
+              style="object-fit: contain" />
+            <div class="mb-3">
+              <button type="button" class="btn btn-outline-dark" @click="newProduct.byteImage = ''">
+                Change Image
+              </button>
+            </div>
           </div>
 
           <button type="submit" class="btn btn-primary">Submit</button>
@@ -149,9 +172,8 @@ function getProducts() {
 }
 
 function modalOpen(product: Product | null = null) {
-  console.log(product);
   if (product) {
-    newProduct.value = product;
+    newProduct.value = structuredClone(product);
   } else {
     newProduct.value = {
       name: '',
@@ -161,6 +183,7 @@ function modalOpen(product: Product | null = null) {
       gender: '',
       description: '',
       image: null,
+      sizes: [],
     };
   }
 }
@@ -173,8 +196,21 @@ function addProduct() {
     formData.append('categoryId', newProduct.value.categoryId.toString());
     formData.append('color', newProduct.value.color);
     formData.append('description', newProduct.value.description);
-    formData.append('image', newProduct.value.image as File);
     formData.append('gender', newProduct.value.gender);
+    if (newProduct.value.byteImage) {
+      // formData.append('byteImage', newProduct.value.byteImage);
+      // turn it into a file
+      const byteCharacters = atob(newProduct.value.byteImage);
+      const byteNumbers = new Array(byteCharacters.length);
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      const blob = new Blob([byteArray], { type: 'image/png' });
+      formData.append('image', blob);
+    } else {
+      formData.append('image', newProduct.value.image as File);
+    }
 
     if (newProduct.value.id) {
       axios.put(`/api/admin/product/${newProduct.value.id}/edit`, formData).then(() => {
@@ -195,7 +231,7 @@ function closeModal() {
 }
 
 function deleteCategory(category: Category) {
-  axios.delete(`/api/admin/category/${category.id}/delete`).then(() => {
+  axios.delete(`/api/admin/product/${category.id}/delete`).then(() => {
     getCategories();
   });
 }

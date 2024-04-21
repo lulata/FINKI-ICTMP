@@ -6,7 +6,6 @@
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">#</th>
           <th scope="col">Name</th>
           <th scope="col">Description</th>
           <th scope="col">
@@ -18,7 +17,6 @@
       </thead>
       <tbody>
         <tr v-for="category in categories" :key="category.id">
-          <th scope="row">{{ category.id }}</th>
           <td>
             {{ category.name }}
           </td>
@@ -79,7 +77,7 @@ function getCategories() {
 function modalOpen(category: Category | null = null) {
   console.log(category);
   if (category) {
-    newCategory.value = category;
+    newCategory.value = structuredClone(category);
   } else {
     newCategory.value = {
       name: '',

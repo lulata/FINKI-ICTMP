@@ -26,4 +26,13 @@ export type Product = {
   color: string;
   gender: string;
   byteImage?: string;
+  sizes: ProductSize[];
 };
+
+export type ProductSize = {
+  id?: number;
+  name: string;
+  quantity: number;
+};
+
+// export interface ProductCreation extends Omit<Product, 'id'> {}
