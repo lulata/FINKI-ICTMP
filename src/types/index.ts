@@ -9,3 +9,21 @@ export type UserInfo = {
   role: 'ADMIN' | 'USER';
   shoppingCart: unknown[];
 };
+
+export type Category = {
+  id?: number;
+  name: string;
+  description: string;
+};
+
+export type Product = {
+  id?: number;
+  name: string;
+  description: string;
+  price: number;
+  image: File | null;
+  categoryId: number;
+  color: string;
+  gender: string;
+  byteImage?: string;
+};

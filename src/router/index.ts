@@ -40,7 +40,25 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/admin',
     name: 'AdminPage',
-    component: () => import(/* webpackChunkName: "user" */ '@/views/AdminPage.vue'),
+    component: () => import(/* webpackChunkName: "user" */ '@/views/admin/AdminPage.vue'),
+    meta: {
+      requiresAuth: true,
+      requiresAdmin: true,
+    },
+  },
+  {
+    path: '/admin/categories',
+    name: 'AdminPageCategory',
+    component: () => import(/* webpackChunkName: "user" */ '@/views/admin/AdminPageCategory.vue'),
+    meta: {
+      requiresAuth: true,
+      requiresAdmin: true,
+    },
+  },
+  {
+    path: '/admin/products',
+    name: 'AdminPageProduct',
+    component: () => import(/* webpackChunkName: "user" */ '@/views/admin/AdminPageProduct.vue'),
     meta: {
       requiresAuth: true,
       requiresAdmin: true,

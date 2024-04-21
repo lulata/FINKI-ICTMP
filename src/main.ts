@@ -14,12 +14,16 @@ declare global {
     isAuthenticated: boolean;
     token: string;
     userInfo: UserInfo | null;
+    colors: string[];
+    genders: string[];
   }
 }
 
 window.isAuthenticated = false;
 window.token = '';
 window.userInfo = null;
+window.colors = ['Red', 'Blue', 'Green', 'Yellow', 'Black', 'White', 'Purple', 'Orange', 'Pink', 'Brown'];
+window.genders = ['MALE', 'FEMALE', 'UNISEX'];
 
 const store26Token = document.cookie.split(';').find((cookie) => cookie.trim().startsWith('store26Token='));
 

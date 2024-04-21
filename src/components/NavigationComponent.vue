@@ -47,7 +47,7 @@
       <router-link
         v-else
         :to="{
-          name: 'LandingPage',
+          name: 'AdminPage',
         }">
         <img src="@/assets/accountIcon.svg" />
       </router-link>
