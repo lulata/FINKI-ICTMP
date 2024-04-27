@@ -2,7 +2,7 @@
   <div class="item-card">
     <img :src="convertByteToImage(product.byteImage || '')" />
     <p>{{ product.name }}</p>
-    <p>{{ product.price }}</p>
+    <p>{{ product.price }} Den</p>
   </div>
 </template>
 
