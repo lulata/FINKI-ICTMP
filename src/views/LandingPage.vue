@@ -27,7 +27,10 @@
         v-for="category in categories"
         :key="category.category"
         :to="{
-          name: 'LandingPage',
+          name: 'CategoryPage',
+          params: {
+            id: category.category,
+          },
         }">
         <img :src="category.image" alt="" />
       </router-link>
@@ -82,10 +85,6 @@ const categories = [
   {
     image: '/categories/women.png',
     category: 'women',
-  },
-  {
-    image: '/categories/kids.png',
-    category: 'kids',
   },
 ];
 </script>

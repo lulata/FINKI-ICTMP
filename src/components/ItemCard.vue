@@ -1,23 +1,19 @@
 <template>
   <div class="item-card">
-    <img :src="product.image" />
-    <p>{{ product.title }}</p>
-    <div class="item-discount" v-if="product.discount">
-      <p>{{ product.price }}</p>
-      <p>{{ product.discount }}</p>
-    </div>
-    <p v-else>{{ product.price }}</p>
+    <img :src="convertByteToImage(product.byteImage || '')" />
+    <p>{{ product.name }}</p>
+    <p>{{ product.price }}</p>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { Product } from '@/types';
 import { defineProps } from 'vue';
 defineProps<{
-  product: {
-    image: string;
-    title: string;
-    price: string;
-    discount: string | null;
-  };
+  product: Product;
 }>();
+
+function convertByteToImage(byteImage: string) {
+  return `data:image/png;base64,${byteImage}`;
+}
 </script>

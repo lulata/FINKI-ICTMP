@@ -22,21 +22,21 @@
       </router-link>
       <router-link
         :to="{
-          name: 'LandingPage',
+          name: 'CategoryPage',
+          params: {
+            id: 'men',
+          },
         }"
         >Men</router-link
       >
       <router-link
         :to="{
-          name: 'LandingPage',
+          name: 'CategoryPage',
+          params: {
+            id: 'women',
+          },
         }"
         >Women</router-link
-      >
-      <router-link
-        :to="{
-          name: 'LandingPage',
-        }"
-        >Kids</router-link
       >
     </div>
     <div class="navigation-section">

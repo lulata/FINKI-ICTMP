@@ -20,7 +20,7 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: '/category',
+    path: '/category/:id',
     name: 'CategoryPage',
     component: () => import(/* webpackChunkName: "user" */ '@/views/CategoryPage.vue'),
     meta: {
@@ -29,7 +29,7 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: '/product',
+    path: '/product/:id',
     name: 'ProductPage',
     component: () => import(/* webpackChunkName: "user" */ '@/views/ProductPage.vue'),
     meta: {
