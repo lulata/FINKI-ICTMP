@@ -6,7 +6,7 @@
     <img src="@/assets/shopBanner.png" alt="" />
     <div class="shop-page-must-have">
       <router-link
-        v-for="product in firstFourProducts"
+        v-for="product in random3Products"
         :key="product.name"
         :to="{ name: 'ProductPage', params: { id: product.id } }">
         <ItemCard :product="product" />
@@ -25,6 +25,29 @@
         <img :src="category.image" alt="" />
       </router-link>
     </div>
+    <div class="shop-page-cta">
+      <div class="shop-page-cta-box">
+        <img src="@/assets/shopPageCoupon.png" alt="" />
+        <div class="shop-page-cta-box-info">
+          <div class="shop-page-cta-box-info-title">Never Miss a Sale</div>
+          <div class="shop-page-cta-box-info-cta">
+            <InputComponent :place-holder="'Email'" image="/icons/mailIcon.svg" :input-type="'email'" />
+            <button>Subscribe</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="shop-page-best-sellers">
+      <p class="shop-page-best-sellers-title">Best Sellers</p>
+      <div class="shop-page-best-sellers-items">
+        <router-link
+          v-for="product in firstFourProducts"
+          :key="product.name"
+          :to="{ name: 'ProductPage', params: { id: product.id } }">
+          <ItemCard :product="product" />
+        </router-link>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -33,6 +56,7 @@ import ItemCard from '@/components/ItemCard.vue';
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import { Product } from '@/types';
+import InputComponent from '@/components/InputComponent.vue';
 
 const categories = [
   {
