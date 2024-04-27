@@ -1,6 +1,9 @@
 <template>
+  <div class="product-page">
+    <div class="product-page-header"></div>
+  </div>
 
-  <div class="productPage">
+  <div class="container">
     <h4>Route</h4>
     <div class="productPage">
       <div class="card flex-row">
@@ -65,7 +68,7 @@ function getProductsForLandingPage() {
   });
 }
 </script>
-<style lang="scss" scoped> 
+<style lang="scss" scoped>
 h4 {
   padding-top: 20px;
 }
