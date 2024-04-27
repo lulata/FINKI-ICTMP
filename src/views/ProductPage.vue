@@ -1,9 +1,8 @@
 <template>
-    
-    <div class="container">
-  <div class="container">
+
+  <div class="productPage">
     <h4>Route</h4>
-    <div class="container">
+    <div class="productPage">
       <div class="card flex-row">
         <img class="card-img-left example-card-img-responsive" src="" />
         <div class="card-body">
@@ -29,10 +28,9 @@
       </div>
     </div>
   </div>
-  <div class="container">
-    <h3>More About the product</h3>
+  <div class="productPage">
+    <h3>More About the product</h3>    
     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-    </div>
     <div class="best-seller-box">
       <p class="best-seller-box-title">Similar products</p>
       <div class="best-seller-box-items">
@@ -46,7 +44,8 @@
         </div>
       </div>
     </div>
-  </div>
+</div>
+    
 </template>
 <script lang="ts" setup>
 import { Product } from '@/types';
