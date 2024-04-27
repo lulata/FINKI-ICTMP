@@ -1,4 +1,5 @@
 <template>
+    
     <div class="container">
     <h4>Route</h4>
         <div class="container">
@@ -23,14 +24,39 @@
     <h3>More About the product</h3>
     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
     </div>
-    <div class="container">
-    <h3>Similar products</h3> 
-    <div class="row">
-            <div v-for="(slikica,index) in 3" :key="index" class="col-md-4">BlahBlah</div>
+    <div class="best-seller-box">
+      <p class="best-seller-box-title">Similar products</p>
+      <div class="best-seller-box-items">
+        <div class="best-seller-box-items-box">
+          <router-link
+            v-for="product in products"
+            :key="product.name"
+            :to="{ name: 'ProductPage', params: { id: product.id } }">
+            <ItemCard :product="product" />
+          </router-link>
         </div>
+      </div>
     </div>
 
 </template>
+<script lang="ts" setup>
+import { Product } from '@/types';
+import ItemCard from '@/components/ItemCard.vue';
+import axios from 'axios';
+import { ref, onMounted } from 'vue';
+
+const products = ref<Product[]>([]);
+
+onMounted(() => {
+  getProductsForLandingPage();
+});
+
+function getProductsForLandingPage() {
+  axios.get('/api/product/all').then((response) => {
+    products.value = response.data.slice(0, 4);
+  });
+}
+</script>
 <style lang="scss" scoped> 
 h4 {
     padding-top: 20px;
