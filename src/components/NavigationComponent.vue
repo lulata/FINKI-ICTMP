@@ -32,12 +32,7 @@
         }"
         >Women</router-link
       >
-      <router-link
-        :to="{
-          name: 'LandingPage',
-        }"
-        >Kids</router-link
-      >
+
     </div>
     <div class="navigation-section">
       <InputComponent :image="'/icons/searchIcon.svg'" />

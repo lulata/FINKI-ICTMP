@@ -46,33 +46,9 @@
 
 <script lang="ts" setup>
 import ItemCard from '@/components/ItemCard.vue';
+import axios from 'axios';
+import { ref } from 'vue';
 
-const products = [
-  {
-    image: '/clothes/shorts.png',
-    title: 'Shorts',
-    price: '890 MKD',
-    discount: null,
-  },
-  {
-    image: '/clothes/shirt.png',
-    title: 'T-Shirt',
-    price: '1090 MKD',
-    discount: '790 MKD',
-  },
-  {
-    image: '/clothes/trousers.png',
-    title: 'Tracksuit',
-    price: '1290 MKD',
-    discount: null,
-  },
-  {
-    image: '/clothes/hoodie.png',
-    title: 'Hoodie',
-    price: '1490 MKD',
-    discount: null,
-  },
-];
 
 const categories = [
   {
@@ -83,9 +59,14 @@ const categories = [
     image: '/categories/women.png',
     category: 'women',
   },
-  {
-    image: '/categories/kids.png',
-    category: 'kids',
-  },
 ];
+
+let products:any=ref([]);
+function getProductsForLandingPage(){
+  axios.get('/api/product/all').then((response) => {
+    products.value=response.data;
+  })
+}
+getProductsForLandingPage();
+
 </script>
