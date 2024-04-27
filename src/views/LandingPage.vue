@@ -17,7 +17,12 @@
       <p class="best-seller-box-title">Best Sellers</p>
       <div class="best-seller-box-items">
         <div class="best-seller-box-items-box">
-          <ItemCard v-for="product in products" :key="product.title" :product="product" />
+          <router-link
+            v-for="product in products"
+            :key="product.name"
+            :to="{ name: 'ProductPage', params: { id: product.id } }">
+            <ItemCard :product="product" />
+          </router-link>
         </div>
       </div>
     </div>
@@ -50,8 +55,8 @@
 <script lang="ts" setup>
 import ItemCard from '@/components/ItemCard.vue';
 import axios from 'axios';
-import { ref } from 'vue';
-
+import { ref, onMounted } from 'vue';
+import { Product } from '@/types';
 
 const categories = [
   {
@@ -64,12 +69,15 @@ const categories = [
   },
 ];
 
-let products:any=ref([]);
-function getProductsForLandingPage(){
-  axios.get('/api/product/all').then((response) => {
-    products.value=response.data;
-  })
-}
-getProductsForLandingPage();
+const products = ref<Product[]>([]);
 
+onMounted(() => {
+  getProductsForLandingPage();
+});
+
+function getProductsForLandingPage() {
+  axios.get('/api/product/all').then((response) => {
+    products.value = response.data.slice(0, 4);
+  });
+}
 </script>
