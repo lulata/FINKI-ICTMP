@@ -20,6 +20,15 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    path: '/checkout',
+    name: 'CheckoutPage',
+    component: () => import(/* webpackChunkName: "user" */ '@/views/CheckoutPage.vue'),
+    meta: {
+      requiresAuth: false,
+      requiresAdmin: false,
+    },
+  },
+  {
     path: '/category/:id',
     name: 'CategoryPage',
     component: () => import(/* webpackChunkName: "user" */ '@/views/CategoryPage.vue'),
