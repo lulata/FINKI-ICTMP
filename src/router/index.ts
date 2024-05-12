@@ -47,6 +47,15 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    path: '/profile',
+    name: 'ProfilePage',
+    component: () => import(/* webpackChunkName: "user" */ '@/views/ProfilePage.vue'),
+    meta: {
+      requiresAuth: false,
+      requiresAdmin: false,
+    },
+  },
+  {
     path: '/admin',
     name: 'AdminPage',
     component: () => import(/* webpackChunkName: "user" */ '@/views/admin/AdminPage.vue'),

@@ -29,9 +29,15 @@
             <p>Total: </p>
           </div>
       </div>
+      <button type="button" class="btn btn-success"> Order </button>
     </div>
   </template>
   <style>
    .col{
     padding: 20px 10px;}
   </style>
+
+  <!-- <script>
+   import OrderSuccess from '@/components/OrderSuccess.vue';
+
+  </script> -->
