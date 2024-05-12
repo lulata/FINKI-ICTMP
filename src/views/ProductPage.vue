@@ -22,12 +22,13 @@
             </button>
           </div>
         </div>
-        <button class="product-page-header-info-button">Add to cart</button>
+        <button class="product-page-header-info-button" @click="addToCard()">Add to cart</button>
       </div>
     </div>
     <div class="best-seller-box">
       <p class="best-seller-box-title">Similar products</p>
       <div class="best-seller-box-items">
+        <!-- FIX ROUTING -->
         <router-link
           v-for="product in products"
           :key="product.name"
@@ -57,6 +58,9 @@ onMounted(() => {
 function getProduct() {
   axios.get(`/api/product/${route.params.id}`).then((response) => {
     product.value = response.data;
+    if (response.data.sizes && response.data.sizes.length > 0) {
+      sizeSelected.value = response.data.sizes[0].id;
+    }
   });
 }
 
@@ -72,5 +76,12 @@ function convertByteToImage(byteImage: string) {
 
 function selectSize(sizeId: number) {
   sizeSelected.value = sizeId;
+}
+
+function addToCard() {
+  const cartId = 1;
+  axios.post(`/api/user/shoppingCart/${cartId}/product/${product.value?.id}/size/${sizeSelected.value}/addCartItem`, {
+    quantity: 1,
+  });
 }
 </script>

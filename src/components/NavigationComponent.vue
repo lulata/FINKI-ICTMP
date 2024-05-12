@@ -38,11 +38,9 @@
         }"
         >Women</router-link
       >
-
     </div>
     <div class="navigation-section">
       <InputComponent :image="'/icons/searchIcon.svg'" />
-      <img src="@/assets/heartIcon.svg" alt="" />
       <img src="@/assets/cartIcon.svg" alt="" />
       <img src="@/assets/accountIcon.svg" @click="authComponentOpened = true" v-if="!isAuthenticated" />
       <router-link
