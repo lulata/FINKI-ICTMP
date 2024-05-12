@@ -183,6 +183,7 @@ function modalOpen(product: Product | null = null) {
       gender: '',
       description: '',
       image: null,
+      reviews: [],
       sizes: [],
     };
   }

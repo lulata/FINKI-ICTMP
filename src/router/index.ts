@@ -24,7 +24,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'CheckoutPage',
     component: () => import(/* webpackChunkName: "user" */ '@/views/CheckoutPage.vue'),
     meta: {
-      requiresAuth: false,
+      requiresAuth: true,
       requiresAdmin: false,
     },
   },
@@ -51,23 +51,24 @@ const routes: Array<RouteRecordRaw> = [
     name: 'ProfilePage',
     component: () => import(/* webpackChunkName: "user" */ '@/views/ProfilePage.vue'),
     meta: {
-      requiresAuth: false,
+      requiresAuth: true,
       requiresAdmin: false,
     },
   },
+
   {
-    path: '/admin',
-    name: 'AdminPage',
-    component: () => import(/* webpackChunkName: "user" */ '@/views/admin/AdminPage.vue'),
+    path: '/admin/categories',
+    name: 'AdminPageCategory',
+    component: () => import(/* webpackChunkName: "user" */ '@/views/admin/AdminPageCategory.vue'),
     meta: {
       requiresAuth: true,
       requiresAdmin: true,
     },
   },
   {
-    path: '/admin/categories',
-    name: 'AdminPageCategory',
-    component: () => import(/* webpackChunkName: "user" */ '@/views/admin/AdminPageCategory.vue'),
+    path: '/admin/orders',
+    name: 'AdminPageOrders',
+    component: () => import(/* webpackChunkName: "user" */ '@/views/admin/AdminPageOrders.vue'),
     meta: {
       requiresAuth: true,
       requiresAdmin: true,

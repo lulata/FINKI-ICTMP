@@ -5,7 +5,7 @@
       :id="id"
       v-model="value"
       :type="inputType"
-      :placeholder="placeHolder ? placeHolder : '' + (errorMessage ? ' - ' + errorMessage : '')" />
+      :placeholder="errorMessage ? placeHolder + ' - ' + errorMessage : placeHolder" />
     <label :for="id"></label>
   </div>
 </template>

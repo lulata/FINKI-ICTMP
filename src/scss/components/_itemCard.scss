@@ -21,3 +21,29 @@
     }
   }
 }
+
+.item-card-smaller {
+  display: flex;
+  gap: 10px;
+  img {
+    width: 64px;
+    height: 81px;
+    object-fit: cover;
+  }
+
+  .item-card-smaller-info {
+    display: flex;
+    flex-direction: column;
+    p {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+      margin: 0;
+    }
+    span {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 24px;
+    }
+  }
+}
