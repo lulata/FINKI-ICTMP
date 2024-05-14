@@ -7,8 +7,7 @@ export type UserInfo = {
   orders: unknown[];
   reviews: unknown[];
   role: 'ADMIN' | 'USER';
-  shoppingCart: unknown[];
-  shoppingCartId: number;
+  shoppingCart: number;
 };
 
 export type Category = {

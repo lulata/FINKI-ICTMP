@@ -80,8 +80,13 @@ onMounted(() => {
 });
 
 function getOrders() {
-  axios.get('/api/user/orders').then((response) => {
-    orders.value = response.data;
-  });
+  axios
+    .get('/api/user/orders')
+    .then((response) => {
+      orders.value = response.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
 </script>

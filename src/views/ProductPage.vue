@@ -214,11 +214,11 @@ function selectSize(sizeId: number) {
 function addToCard() {
   let cartId = 1;
 
-  if (window.userInfo?.shoppingCartId) {
-    cartId = window.userInfo.shoppingCartId;
+  if (window.userInfo?.shoppingCart) {
+    cartId = window.userInfo.shoppingCart;
   }
   axios.post(`/api/user/shoppingCart/${cartId}/product/${product.value?.id}/size/${sizeSelected.value}/addCartItem`, {
-    quantity: 3,
+    quantity: 1,
   });
 }
 

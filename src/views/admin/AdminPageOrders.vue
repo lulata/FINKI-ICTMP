@@ -10,6 +10,8 @@
           <th scope="col">Total</th>
           <th scope="col">Time</th>
           <th scope="col">Status</th>
+          <th scope="col">Address</th>
+          <th scope="col">Phone</th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -28,6 +30,12 @@
           </td>
           <td>
             {{ order.status }}
+          </td>
+          <td>
+            {{ order.address }}
+          </td>
+          <td>
+            {{ order.phoneNumber }}
           </td>
 
           <td>

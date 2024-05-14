@@ -53,8 +53,8 @@ const total = computed(() => {
 onMounted(() => {
   let cartId = 1;
 
-  if (window.userInfo?.shoppingCartId) {
-    cartId = window.userInfo.shoppingCartId;
+  if (window.userInfo?.shoppingCart) {
+    cartId = window.userInfo.shoppingCart;
   }
   axios.get(`/api/user/shoppingCart/${cartId}/items`).then((response) => {
     cartItems.value = response.data;
