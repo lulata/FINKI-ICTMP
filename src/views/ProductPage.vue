@@ -214,9 +214,22 @@ function selectSize(sizeId: number) {
 function addToCard() {
   let cartId = 1;
 
-  if (window.userInfo?.shoppingCart) {
+  console.log(product.value);
+
+  if (
+    product.value?.sizes === undefined ||
+    product.value?.sizes === null ||
+    product.value?.sizes.length === 0 ||
+    sizeSelected.value === null
+  ) {
+    alert('Please select a size');
+    return;
+  }
+
+  if (window.userInfo?.shoppingCart !== undefined && window.userInfo.shoppingCart !== null) {
     cartId = window.userInfo.shoppingCart;
   }
+
   axios.post(`/api/user/shoppingCart/${cartId}/product/${product.value?.id}/size/${sizeSelected.value}/addCartItem`, {
     quantity: 1,
   });
